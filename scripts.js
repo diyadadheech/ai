@@ -1,49 +1,32 @@
-document.getElementById('user-input').addEventListener('keypress', function (event) {
-  if (event.key === 'Enter') {
-    handleUserInput();
-  }
+$(document).ready(function() {
+    $('#sendBtn').click(function() {
+        var userInput = $('#userInput').val();
+        if (userInput.trim() !== "") {
+            $('#chatBox').append('<p class="user-message">' + userInput + '</p>');
+            generateResponse(userInput);
+            $('#userInput').val('');
+        }
+    });
+
+    function generateResponse(input) {
+        var response = "";
+
+        // Simple predefined responses
+        if (input.toLowerCase().includes("hello")) {
+            response = "Hello! How can I assist you today?";
+        } else if (input.toLowerCase().includes("how are you")) {
+            response = "I'm just a bot, but I'm doing great! How about you?";
+        } else if (input.toLowerCase().includes("what is your name")) {
+            response = "I'm your friendly chatbot!";
+        } else if (input.toLowerCase().includes("weather")) {
+            response = "I can't check the weather right now, but you can use a weather app!";
+        } else {
+            response = "I'm not sure how to answer that. Could you ask something else?";
+        }
+
+        setTimeout(function() {
+            $('#chatBox').append('<p class="bot-response">' + response + '</p>');
+            $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+        }, 500); // Delay response to simulate typing
+    }
 });
-
-function handleUserInput() {
-  const inputField = document.getElementById('user-input');
-  const userMessage = inputField.value.trim();
-  
-  if (userMessage) {
-    addMessage(userMessage, 'user');
-    generateResponse(userMessage);
-    inputField.value = '';
-  }
-}
-
-function addMessage(text, sender) {
-  const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', sender);
-  messageDiv.textContent = text;
-  document.getElementById('messages').appendChild(messageDiv);
-  document.getElementById('chat-container').scrollTop = document.getElementById('chat-container').scrollHeight;
-}
-
-function generateResponse(userMessage) {
-  const nlpDoc = nlp(userMessage);
-  const topics = nlpDoc.topics().out('array');  // Extract key topics
-  const lowerMessage = userMessage.toLowerCase();
-  
-  let botResponse = "I'm sorry, I didn't understand that.";
-  
-  if (topics.includes('weather')) {
-    botResponse = 'I can’t check the weather right now, but you can use a weather website.';
-  } else if (topics.includes('time')) {
-    botResponse = `The current time is ${new Date().toLocaleTimeString()}.`;
-  } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-    botResponse = 'Hello! How can I assist you today?';
-  } else if (lowerMessage.includes('help')) {
-    botResponse = 'Sure! Let me know what you need help with.';
-  } else if (lowerMessage.includes('your name')) {
-    botResponse = 'I am your AI chatbot!';
-  } else if (lowerMessage.includes('bye')) {
-    botResponse = 'Goodbye! Have a great day!';
-  }
-
-  setTimeout(() => addMessage(botResponse, 'bot'), 500);
-}
-s
