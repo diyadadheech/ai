@@ -24,16 +24,26 @@ function addMessage(text, sender) {
 }
 
 function generateResponse(userMessage) {
-  let botResponse = '';
+  const nlpDoc = nlp(userMessage);
+  const topics = nlpDoc.topics().out('array');  // Extract key topics
+  const lowerMessage = userMessage.toLowerCase();
   
-  // Simple keyword matching logic
-  if (userMessage.toLowerCase().includes('hello')) {
-    botResponse = 'Hi there! How can I assist you today?';
-  } else if (userMessage.toLowerCase().includes('help')) {
-    botResponse = 'Sure! What do you need help with?';
-  } else {
-    botResponse = "I'm not sure how to respond to that.";
+  let botResponse = "I'm sorry, I didn't understand that.";
+  
+  if (topics.includes('weather')) {
+    botResponse = 'I can’t check the weather right now, but you can use a weather website.';
+  } else if (topics.includes('time')) {
+    botResponse = `The current time is ${new Date().toLocaleTimeString()}.`;
+  } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+    botResponse = 'Hello! How can I assist you today?';
+  } else if (lowerMessage.includes('help')) {
+    botResponse = 'Sure! Let me know what you need help with.';
+  } else if (lowerMessage.includes('your name')) {
+    botResponse = 'I am your AI chatbot!';
+  } else if (lowerMessage.includes('bye')) {
+    botResponse = 'Goodbye! Have a great day!';
   }
-  
+
   setTimeout(() => addMessage(botResponse, 'bot'), 500);
 }
+s
