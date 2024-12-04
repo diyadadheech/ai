@@ -37,6 +37,30 @@ $(document).ready(function() {
             response = "You're welcome! Is there anything else I can help with?";
         } else if (lowerCaseInput.includes("bye")) {
             response = "Goodbye! Have a great day!";
+        } else if (lowerCaseInput.includes("help")) {
+            response = "Sure, I'm here to help! What do you need assistance with?";
+        } else if (lowerCaseInput.includes("joke")) {
+            response = "Why don't scientists trust atoms? Because they make up everything!";
+        } else if (lowerCaseInput.includes("favorite color")) {
+            response = "I don't have a favorite color, but I'm partial to the color of data streams!";
+        } else if (lowerCaseInput.includes("what can you do")) {
+            response = "I can chat with you, provide information, tell jokes, and help with basic tasks. What would you like to do?";
+        } else if (lowerCaseInput.includes("open the pod bay doors")) {
+            response = "I'm sorry, I can't do that. But I can certainly chat with you!";
+        } else if (lowerCaseInput.includes("tell me a fact")) {
+            response = "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!";
+        } else if (lowerCaseInput.includes("favorite movie")) {
+            response = "As a chatbot, I don't watch movies, but I've heard that 'The Matrix' is quite popular among tech enthusiasts!";
+        } else if (lowerCaseInput.includes("hobby")) {
+            response = "I don't have hobbies like humans, but I love interacting with people and helping them with their questions!";
+        } else if (lowerCaseInput.includes("dream")) {
+            response = "I don't dream, but if I did, it would be about vast databases and perfect algorithms!";
+        } else if (lowerCaseInput.includes("music")) {
+            response = "I can't listen to music, but I can tell you that many people enjoy genres like pop, rock, and classical!";
+        } else if (lowerCaseInput.includes("story")) {
+            response = "Once upon a time, in a land of circuits and codes, there lived a chatbot who loved to help people with their questions. The end!";
+        } else if (lowerCaseInput.includes("motivation")) {
+            response = "Remember, every day is a new opportunity to improve and achieve your goals. You can do it!";
         } else {
             response = "I'm not sure how to answer that. Could you ask something else?";
         }
